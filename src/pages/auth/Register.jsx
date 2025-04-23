@@ -4,11 +4,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate(); //register bhaisake paxi page retrive garna
   const handleRegister = async (data) => {
     try {
       const response = await axios.post(
-        "https://react30.onrender.com/api/user/register",
+        `${baseUrl}/register`, //register endpoint ma data pathaune
         data
       );
       if (response.status === 201) {
