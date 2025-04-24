@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 const AddBlog = () => {
   const navigation = useNavigate();
   const handelCreateBlog = async (data) => {
-    console.log(data);
     try {
       const response = await axios.post(`${baseUrl}/blog`, data, {
         headers: {

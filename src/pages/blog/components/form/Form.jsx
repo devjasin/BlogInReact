@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Form = ({ title, onSubmit }) => {
+const Form = ({ title, onSubmit, blog }) => {
   const [data, setData] = useState({
     title: "",
     subtitle: "",
@@ -8,6 +8,19 @@ const Form = ({ title, onSubmit }) => {
     description: "",
     image: "",
   });
+  //when blog is passed ,update the state
+  useEffect(() => {
+    if (blog) {
+      setData({
+        title: blog.title || "",
+        subtitle: blog.subtitle || "",
+        category: blog.category || "",
+        description: blog.description || "",
+        image: "",
+      });
+    }
+  }, [blog]);
+
   const handelChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: name === "image" ? e.target.files[0] : value }); //image file xa vane e.target.files ma aauxa ,yo ternery operator
@@ -28,6 +41,7 @@ const Form = ({ title, onSubmit }) => {
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
               <input
                 name="title"
+                value={data.title}
                 className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Title"
@@ -35,6 +49,7 @@ const Form = ({ title, onSubmit }) => {
               />
               <input
                 name="subtitle"
+                value={data.subtitle}
                 className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Sub Title"
@@ -49,15 +64,17 @@ const Form = ({ title, onSubmit }) => {
 
               <input
                 name="category"
+                value={data.category}
                 className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="category"
+                placeholder="Category"
                 onChange={handelChange}
               />
             </div>
             <div className="my-4">
               <textarea
                 name="description"
+                value={data.description}
                 placeholder="description"
                 className="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 onChange={handelChange}

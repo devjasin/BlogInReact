@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Card = ({ blog }) => {
+  // Get the blog ID from the URL parameters
   return (
-    <Link to="/blogs/id">
+    <Link to={`/blogs/${blog._id}`}>
       <div className="max-w-sm rounded overflow-hidden shadow-lg">
         <img
           className="w-full"
